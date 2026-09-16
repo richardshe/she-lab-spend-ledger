@@ -1,0 +1,17 @@
+# Source PDFs stay local: 38 MB of purchase orders and supplier quotes carrying
+# vendor pricing, contact names and addresses. Everything downstream of them is
+# in analytics/ and dashboard/.
+*.pdf
+*.xls
+
+# Pipeline intermediates - regenerate with pipeline/run_all.sh
+po_raw.json
+quotes_raw.json
+payload.json
+__pycache__/
+*.pyc
+.DS_Store
+
+# Ariba working files
+_worklist.csv
+_pr_list.txt

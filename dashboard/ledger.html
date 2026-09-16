@@ -1,0 +1,839 @@
+<title>She Lab Spend Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+/* ---- tokens: light is the complete set; dark redefines only values ---- */
+:root {
+  color-scheme: light;
+  --ground:      #f7f9f8;
+  --surface:     #ffffff;
+  --surface-2:   #f1f4f2;
+  --border:      #e0e6e3;
+  --border-firm: #c9d2ce;
+  --ink:         #14181a;
+  --ink-2:       #555f5c;
+  --ink-3:       #87918d;
+  --accent:      #2a78d6;
+  --accent-soft: #e8f0fc;
+  --s1:          #2a78d6;
+  --s2:          #eb6834;
+  --s3:          #1baf7a;
+  --good:        #008300;
+  --warn:        #eda100;
+  --crit:        #e34948;
+  --bar:         #2a78d6;
+  --bar-soft:    #cde2fb;
+  --grid:        #e8edeb;
+  --shadow:      0 1px 2px rgba(20,24,26,.05), 0 6px 18px -12px rgba(20,24,26,.22);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground:      #121513;
+    --surface:     #1a1f1c;
+    --surface-2:   #222825;
+    --border:      #2b332f;
+    --border-firm: #3c4641;
+    --ink:         #eef3f1;
+    --ink-2:       #a6b0ac;
+    --ink-3:       #79837f;
+    --accent:      #3987e5;
+    --accent-soft: #17293d;
+    --s1:          #3987e5;
+    --s2:          #d95926;
+    --s3:          #199e70;
+    --good:        #34a534;
+    --warn:        #c98500;
+    --crit:        #e66767;
+    --bar:         #3987e5;
+    --bar-soft:    #1c3a5c;
+    --grid:        #262d2a;
+    --shadow:      0 1px 2px rgba(0,0,0,.4), 0 6px 18px -12px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground:      #121513;
+  --surface:     #1a1f1c;
+  --surface-2:   #222825;
+  --border:      #2b332f;
+  --border-firm: #3c4641;
+  --ink:         #eef3f1;
+  --ink-2:       #a6b0ac;
+  --ink-3:       #79837f;
+  --accent:      #3987e5;
+  --accent-soft: #17293d;
+  --s1:          #3987e5;
+  --s2:          #d95926;
+  --s3:          #199e70;
+  --good:        #34a534;
+  --warn:        #c98500;
+  --crit:        #e66767;
+  --bar:         #3987e5;
+  --bar-soft:    #1c3a5c;
+  --grid:        #262d2a;
+  --shadow:      0 1px 2px rgba(0,0,0,.4), 0 6px 18px -12px rgba(0,0,0,.7);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font: 400 14px/1.55 "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.num, code, .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace; font-variant-numeric: tabular-nums; }
+h1, h2, h3 { font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif; margin: 0; text-wrap: balance; }
+
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: 20px; }
+
+/* ---- masthead ---- */
+.masthead { border-bottom: 1px solid var(--border); background: var(--surface); }
+.masthead .wrap { padding-block: 22px 18px; }
+.eyebrow {
+  font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 7px;
+}
+h1 { font-size: clamp(25px, 4.4vw, 35px); font-weight: 700; letter-spacing: -.015em; line-height: 1.1; }
+.sub { color: var(--ink-2); margin-top: 8px; max-width: 66ch; font-size: 14px; }
+
+/* ---- control bar ---- */
+.controls {
+  position: sticky; top: 0; z-index: 30;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.controls .wrap {
+  display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: flex-end;
+  padding-block: 11px;
+}
+.ctl { display: flex; flex-direction: column; gap: 4px; }
+.ctl > label {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+select, input[type="text"], input[type="number"] {
+  font: inherit; font-size: 13px; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--border-firm);
+  border-radius: 5px; padding: 5px 8px; min-width: 0;
+}
+input[type="number"] { font-family: "IBM Plex Mono", monospace; width: 82px; }
+input[type="text"] { min-width: 190px; }
+:is(select, input):focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.seg { display: inline-flex; border: 1px solid var(--border-firm); border-radius: 5px; overflow: hidden; }
+.seg button {
+  font: 500 12.5px/1 "IBM Plex Sans", sans-serif; color: var(--ink-2);
+  background: var(--surface); border: 0; padding: 7px 11px; cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--border); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.reset {
+  font: 500 12.5px/1 "IBM Plex Sans", sans-serif; color: var(--accent);
+  background: none; border: 0; padding: 7px 4px; cursor: pointer; text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.reset:disabled { color: var(--ink-3); text-decoration: none; cursor: default; }
+
+/* ---- layout ---- */
+main { padding-block: 26px 56px; }
+section { margin-bottom: 34px; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+h2 { font-size: 15px; font-weight: 600; letter-spacing: .01em; }
+.sec-note { font-size: 12.5px; color: var(--ink-3); }
+
+.panel {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 9px; padding: 16px 18px;
+}
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+
+/* ---- KPI strip: a rule-separated row, not a row of cards ---- */
+.kpis {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(146px, 1fr));
+  background: var(--surface); border: 1px solid var(--border); border-radius: 9px;
+  overflow: hidden;
+}
+.kpi { padding: 14px 16px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.kpi:last-child { border-right: 0; }
+.kpi .k-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.kpi .k-val { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums;
+  font-size: 21px; font-weight: 500; letter-spacing: -.02em; margin-top: 5px; }
+.kpi .k-val .cur { font-size: 12px; color: var(--ink-3); margin-right: 2px; }
+.kpi .k-sub { font-size: 11.5px; color: var(--ink-3); margin-top: 2px; }
+.kpi.lead { background: var(--accent-soft); }
+.kpi.lead .k-val { font-size: 25px; color: var(--ink); }
+
+/* ---- monthly columns ---- */
+.chart-wrap { position: relative; }
+svg.chart { display: block; width: 100%; height: auto; overflow: visible; }
+.tip {
+  position: absolute; pointer-events: none; z-index: 10; opacity: 0;
+  transition: opacity .1s; background: var(--surface); color: var(--ink);
+  border: 1px solid var(--border-firm); border-radius: 6px; box-shadow: var(--shadow);
+  padding: 8px 10px; font-size: 12.5px; min-width: 150px; transform: translate(-50%, -100%);
+}
+.tip.on { opacity: 1; }
+.tip .t-m { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-3); }
+.tip .t-v { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums;
+  font-size: 16px; font-weight: 500; margin: 2px 0 4px; }
+.tip .t-r { display: flex; justify-content: space-between; gap: 14px; font-size: 12px; color: var(--ink-2); }
+.tip .t-r span:last-child { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+
+/* ---- horizontal bar lists ---- */
+.bars { display: flex; flex-direction: column; gap: 2px; }
+.bar-row {
+  display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center;
+  padding: 6px 8px; border: 0; background: none; border-radius: 5px;
+  text-align: left; font: inherit; color: inherit; cursor: pointer; width: 100%;
+}
+.bar-row:hover { background: var(--surface-2); }
+.bar-row[aria-pressed="true"] { background: var(--accent-soft); }
+.bar-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.bar-name { font-size: 13px; }
+.bar-val { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums;
+  font-size: 12.5px; color: var(--ink-2); white-space: nowrap; }
+.bar-track { grid-column: 1 / -1; height: 7px; background: var(--surface-2); border-radius: 0 3px 3px 0; }
+.bar-fill { height: 100%; background: var(--bar); border-radius: 0 3px 3px 0; min-width: 2px; }
+.bar-pct { font-size: 11px; color: var(--ink-3); }
+
+/* ---- funding table ---- */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--ink-3); font-weight: 500;
+  text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--border-firm);
+  white-space: nowrap;
+}
+th.r, td.r { text-align: right; }
+td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tbody tr:hover { background: var(--surface-2); }
+td.num, th.num { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+.scroll-x { overflow-x: auto; }
+th.sortable { cursor: pointer; user-select: none; }
+th.sortable:hover { color: var(--ink); }
+th .arrow { color: var(--accent); }
+
+.chip {
+  display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10.5px;
+  letter-spacing: .04em; padding: 1.5px 6px; border-radius: 4px;
+  background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--border);
+  white-space: nowrap;
+}
+.chip.warn { background: color-mix(in srgb, var(--warn) 14%, var(--surface)); border-color: color-mix(in srgb, var(--warn) 38%, var(--border)); color: var(--ink); }
+.chip.good { background: color-mix(in srgb, var(--good) 13%, var(--surface)); border-color: color-mix(in srgb, var(--good) 34%, var(--border)); color: var(--ink); }
+.chip.usd { background: color-mix(in srgb, var(--s2) 13%, var(--surface)); border-color: color-mix(in srgb, var(--s2) 36%, var(--border)); color: var(--ink); }
+
+.empty { padding: 26px 10px; text-align: center; color: var(--ink-3); font-size: 13px; }
+.muted { color: var(--ink-3); }
+.pager { display: flex; gap: 10px; align-items: center; justify-content: flex-end; margin-top: 12px; font-size: 12.5px; color: var(--ink-2); }
+.pager button {
+  font: 500 12.5px "IBM Plex Sans", sans-serif; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--border-firm);
+  border-radius: 5px; padding: 5px 10px; cursor: pointer;
+}
+.pager button:disabled { color: var(--ink-3); cursor: default; }
+.pager button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.note {
+  font-size: 12.5px; color: var(--ink-2); background: var(--surface-2);
+  border-left: 2px solid var(--border-firm); padding: 10px 13px; border-radius: 0 5px 5px 0;
+}
+.note b { color: var(--ink); font-weight: 600; }
+footer { border-top: 1px solid var(--border); padding-block: 20px 34px; color: var(--ink-3); font-size: 12.5px; }
+footer code { font-size: 11.5px; color: var(--ink-2); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media (max-width: 560px) {
+  .controls .wrap { gap: 9px 12px; }
+  input[type="text"] { min-width: 140px; }
+}
+</style>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">NTU School of Biological Sciences &middot; WBS 03INS002449C220 &middot; Ariba</div>
+    <h1>She Lab Spend Ledger</h1>
+    <p class="sub" id="lede">Every purchase order raised against the lab's grant lines, read out of the
+      Ariba PO PDFs and broken down by what was actually bought.</p>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="wrap">
+    <div class="ctl">
+      <label for="basis">Amount basis</label>
+      <div class="seg" role="group" aria-label="Amount basis">
+        <button id="basis" type="button" data-basis="gr" aria-pressed="true">Gross incl. GST</button>
+        <button type="button" data-basis="net" aria-pressed="false">Net ex-GST</button>
+      </div>
+    </div>
+    <div class="ctl">
+      <label for="fx">USD &rarr; SGD</label>
+      <input type="number" id="fx" value="1.30" min="0.5" max="3" step="0.01">
+    </div>
+    <div class="ctl">
+      <label for="from">From</label>
+      <select id="from"></select>
+    </div>
+    <div class="ctl">
+      <label for="to">To</label>
+      <select id="to"></select>
+    </div>
+    <div class="ctl">
+      <label for="req">Requester</label>
+      <select id="req"><option value="">Everyone</option></select>
+    </div>
+    <div class="ctl">
+      <label for="wbs">Grant line</label>
+      <select id="wbs"><option value="">All WBS</option></select>
+    </div>
+    <div class="ctl">
+      <label for="q">Search item, vendor, PO</label>
+      <input type="text" id="q" placeholder="e.g. mTeSR, IDT, 9100305488">
+    </div>
+    <button class="reset" id="reset" type="button" disabled>Clear filters</button>
+  </div>
+</div>
+
+<main class="wrap">
+  <section aria-label="Headline figures">
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Spend by month</h2>
+      <span class="sec-note" id="trend-note"></span>
+    </div>
+    <div class="panel">
+      <div class="chart-wrap" id="trend-wrap">
+        <svg class="chart" id="trend" role="img" aria-label="Monthly spend column chart"></svg>
+        <div class="tip" id="trend-tip" role="status"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="split">
+    <div>
+      <div class="sec-head">
+        <h2>Where the money goes</h2>
+        <span class="sec-note">click to filter</span>
+      </div>
+      <div class="panel"><div class="bars" id="cats"></div></div>
+    </div>
+    <div>
+      <div class="sec-head">
+        <h2>Top vendors</h2>
+        <span class="sec-note">click to filter</span>
+      </div>
+      <div class="panel"><div class="bars" id="vendors"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Subcategory detail</h2>
+      <span class="sec-note" id="sub-note"></span>
+    </div>
+    <div class="panel"><div class="bars" id="subs"></div></div>
+  </section>
+
+  <section class="split">
+    <div>
+      <div class="sec-head"><h2>By grant line (WBS)</h2></div>
+      <div class="panel scroll-x"><table id="wbs-tbl"></table></div>
+    </div>
+    <div>
+      <div class="sec-head"><h2>By GL account</h2></div>
+      <div class="panel scroll-x"><table id="gl-tbl"></table></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Line items</h2>
+      <span class="sec-note" id="tbl-note"></span>
+    </div>
+    <div class="panel">
+      <div class="scroll-x"><table id="items-tbl"></table></div>
+      <div class="pager" id="pager"></div>
+    </div>
+  </section>
+
+  <section class="split">
+    <div>
+      <div class="sec-head">
+        <h2>Negotiated discounts</h2>
+        <span class="sec-note">from attached quotes</span>
+      </div>
+      <div class="panel scroll-x"><table id="disc-tbl"></table></div>
+    </div>
+    <div>
+      <div class="sec-head">
+        <h2>Denied requisitions</h2>
+        <span class="sec-note">never became POs &mdash; excluded from all totals</span>
+      </div>
+      <div class="panel scroll-x"><table id="denied-tbl"></table></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="note" id="provenance"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  Built from <code>175</code> Ariba PO PDFs and <code>89</code> supplier quotes.
+  Every PO reconciles line-by-line to its printed total.
+  Backend: <code>analytics/po_line_items.csv</code>.
+</footer>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.__LEDGER;
+  var ITEMS = D.items;
+
+  var state = {
+    basis: "gr", fx: 1.30, from: null, to: null,
+    req: "", wbs: "", cat: "", sub: "", vendor: "", q: "",
+    sort: "amt", dir: -1, page: 0
+  };
+  var PAGE = 40;
+
+  /* ---------- helpers ---------- */
+  function amt(it) {
+    var v = state.basis === "net" ? it.net : it.gr;
+    if (v == null) v = it.gr || 0;
+    return it.cur === "USD" ? v * state.fx : v;
+  }
+  function money(n, dp) {
+    return n.toLocaleString("en-SG", {
+      minimumFractionDigits: dp == null ? 0 : dp,
+      maximumFractionDigits: dp == null ? 0 : dp
+    });
+  }
+  function monthLabel(m) {
+    var p = m.split("-");
+    var names = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    return names[+p[1] - 1] + " " + p[0].slice(2);
+  }
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function uniq(arr) { return Array.from(new Set(arr)).sort(); }
+
+  var MONTHS = uniq(ITEMS.map(function (i) { return i.m; }));
+  state.from = MONTHS[0];
+  state.to = MONTHS[MONTHS.length - 1];
+
+  function filtered() {
+    var q = state.q.trim().toLowerCase();
+    return ITEMS.filter(function (it) {
+      if (it.m < state.from || it.m > state.to) return false;
+      if (state.req && it.rq !== state.req) return false;
+      if (state.wbs && it.w !== state.wbs) return false;
+      if (state.cat && it.c !== state.cat) return false;
+      if (state.sub && it.s !== state.sub) return false;
+      if (state.vendor && it.v !== state.vendor) return false;
+      if (q) {
+        var hay = (it.i + " " + it.v + " " + it.sup + " " + it.po + " " + it.pn +
+                   " " + it.prt + " " + it.c + " " + it.s + " " + it.pr).toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    });
+  }
+
+  function groupSum(rows, key) {
+    var m = new Map();
+    rows.forEach(function (r) {
+      var k = typeof key === "function" ? key(r) : r[key];
+      var e = m.get(k) || { k: k, amt: 0, n: 0 };
+      e.amt += amt(r); e.n++;
+      m.set(k, e);
+    });
+    return Array.from(m.values()).sort(function (a, b) { return b.amt - a.amt; });
+  }
+
+  /* ---------- KPIs ---------- */
+  function renderKpis(rows) {
+    var total = rows.reduce(function (s, r) { return s + amt(r); }, 0);
+    var pos = new Set(rows.map(function (r) { return r.po; }));
+    var vend = new Set(rows.map(function (r) { return r.v; }));
+    var gst = rows.reduce(function (s, r) {
+      var t = r.tax || 0; return s + (r.cur === "USD" ? t * state.fx : t);
+    }, 0);
+    var usd = rows.filter(function (r) { return r.cur === "USD"; })
+                  .reduce(function (s, r) { return s + amt(r); }, 0);
+    var perPo = pos.size ? total / pos.size : 0;
+
+    var cells = [
+      { c: "lead", l: "Total committed", v: money(total), cur: "S$",
+        s: state.basis === "net" ? "net of GST" : "incl. 9% GST" },
+      { l: "Purchase orders", v: money(pos.size), s: rows.length + " line items" },
+      { l: "Median PO value", v: money(median(pos, rows)), cur: "S$", s: "mean " + money(perPo) },
+      { l: "Vendors", v: money(vend.size), s: "distinct suppliers" },
+      { l: "GST charged", v: money(gst), cur: "S$",
+        s: state.basis === "net" ? "excluded above" : "included above" },
+      { l: "In USD", v: money(usd), cur: "S$", s: "at " + state.fx.toFixed(2) + " USD/SGD" }
+    ];
+    document.getElementById("kpis").innerHTML = cells.map(function (c) {
+      return '<div class="kpi ' + (c.c || "") + '">' +
+        '<div class="k-label">' + c.l + "</div>" +
+        '<div class="k-val">' + (c.cur ? '<span class="cur">' + c.cur + "</span>" : "") + c.v + "</div>" +
+        '<div class="k-sub">' + c.s + "</div></div>";
+    }).join("");
+  }
+  function median(pos, rows) {
+    var byPo = new Map();
+    rows.forEach(function (r) { byPo.set(r.po, (byPo.get(r.po) || 0) + amt(r)); });
+    var v = Array.from(byPo.values()).sort(function (a, b) { return a - b; });
+    if (!v.length) return 0;
+    var h = Math.floor(v.length / 2);
+    return v.length % 2 ? v[h] : (v[h - 1] + v[h]) / 2;
+  }
+
+  /* ---------- monthly columns ---------- */
+  function renderTrend(rows) {
+    var months = MONTHS.filter(function (m) { return m >= state.from && m <= state.to; });
+    var by = new Map(months.map(function (m) { return [m, { amt: 0, n: 0, pos: new Set() }]; }));
+    rows.forEach(function (r) {
+      var e = by.get(r.m);
+      if (e) { e.amt += amt(r); e.n++; e.pos.add(r.po); }
+    });
+    var vals = months.map(function (m) { return by.get(m); });
+    var max = Math.max.apply(null, vals.map(function (v) { return v.amt; }).concat([1]));
+
+    var W = 1000, H = 260, padL = 62, padR = 12, padT = 14, padB = 34;
+    var iw = W - padL - padR, ih = H - padT - padB;
+    var step = iw / months.length, bw = Math.min(46, step * 0.62);
+
+    var ticks = niceTicks(max, 4);
+    var svg = [];
+    ticks.forEach(function (t) {
+      var y = padT + ih - (t / ticks[ticks.length - 1]) * ih;
+      svg.push('<line x1="' + padL + '" y1="' + y.toFixed(1) + '" x2="' + (W - padR) +
+        '" y2="' + y.toFixed(1) + '" stroke="var(--grid)" stroke-width="1"/>');
+      svg.push('<text x="' + (padL - 9) + '" y="' + (y + 3.5).toFixed(1) +
+        '" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="10.5" ' +
+        'fill="var(--ink-3)">' + (t >= 1000 ? (t / 1000) + "k" : t) + "</text>");
+    });
+    var maxTick = ticks[ticks.length - 1];
+    months.forEach(function (m, i) {
+      var v = by.get(m), h = (v.amt / maxTick) * ih;
+      var x = padL + i * step + (step - bw) / 2;
+      var y = padT + ih - h;
+      svg.push('<rect class="col" data-i="' + i + '" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) +
+        '" width="' + bw.toFixed(1) + '" height="' + Math.max(h, 1).toFixed(1) +
+        '" rx="4" ry="4" fill="var(--bar)"/>');
+      svg.push('<rect x="' + (padL + i * step).toFixed(1) + '" y="' + padT + '" width="' + step.toFixed(1) +
+        '" height="' + ih + '" fill="transparent" class="hit" data-i="' + i + '"/>');
+      svg.push('<text x="' + (padL + i * step + step / 2).toFixed(1) + '" y="' + (H - 12) +
+        '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" ' +
+        'fill="var(--ink-3)">' + monthLabel(m) + "</text>");
+    });
+    svg.push('<line x1="' + padL + '" y1="' + (padT + ih) + '" x2="' + (W - padR) +
+      '" y2="' + (padT + ih) + '" stroke="var(--border-firm)" stroke-width="1"/>');
+
+    var el = document.getElementById("trend");
+    el.setAttribute("viewBox", "0 0 " + W + " " + H);
+    el.innerHTML = svg.join("");
+
+    var tip = document.getElementById("trend-tip");
+    var wrap = document.getElementById("trend-wrap");
+    Array.prototype.forEach.call(el.querySelectorAll(".hit"), function (hit) {
+      hit.addEventListener("mouseenter", function () {
+        var i = +hit.dataset.i, m = months[i], v = by.get(m);
+        tip.innerHTML = '<div class="t-m">' + monthLabel(m) + "</div>" +
+          '<div class="t-v">S$' + money(v.amt) + "</div>" +
+          '<div class="t-r"><span>Orders</span><span>' + v.pos.size + "</span></div>" +
+          '<div class="t-r"><span>Line items</span><span>' + v.n + "</span></div>";
+        var r = wrap.getBoundingClientRect();
+        var bx = (padL + i * step + step / 2) / W * r.width;
+        var h = (v.amt / maxTick) * ih;
+        var byPx = (padT + ih - h) / H * r.height;
+        tip.style.left = Math.max(80, Math.min(r.width - 80, bx)) + "px";
+        tip.style.top = Math.max(60, byPx - 8) + "px";
+        tip.classList.add("on");
+      });
+      hit.addEventListener("mouseleave", function () { tip.classList.remove("on"); });
+    });
+
+    var peak = months[vals.indexOf(vals.slice().sort(function (a, b) { return b.amt - a.amt; })[0])];
+    document.getElementById("trend-note").textContent =
+      months.length + " months · busiest " + (peak ? monthLabel(peak) : "—");
+  }
+
+  function niceTicks(max, n) {
+    var raw = max / n;
+    var mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    var norm = raw / mag;
+    var stepN = norm <= 1 ? 1 : norm <= 2 ? 2 : norm <= 5 ? 5 : 10;
+    var step = stepN * mag;
+    var out = [];
+    for (var v = step; v <= Math.ceil(max / step) * step + 1e-6; v += step) out.push(Math.round(v));
+    return out.length ? out : [1];
+  }
+
+  /* ---------- bar lists ---------- */
+  function renderBars(el, groups, total, activeKey, onPick, limit) {
+    var rows = limit ? groups.slice(0, limit) : groups;
+    var max = rows.length ? rows[0].amt : 1;
+    if (!rows.length) { el.innerHTML = '<div class="empty">Nothing matches these filters.</div>'; return; }
+    el.innerHTML = rows.map(function (g) {
+      var pct = total ? (g.amt / total * 100) : 0;
+      return '<button class="bar-row" type="button" data-k="' + esc(g.k) + '" aria-pressed="' +
+        (activeKey === g.k) + '">' +
+        '<span class="bar-name">' + esc(g.k) + "</span>" +
+        '<span class="bar-val">S$' + money(g.amt) + ' <span class="bar-pct">' +
+        pct.toFixed(1) + "%</span></span>" +
+        '<span class="bar-track"><span class="bar-fill" style="width:' +
+        (g.amt / max * 100).toFixed(2) + '%"></span></span>' +
+        "</button>";
+    }).join("");
+    Array.prototype.forEach.call(el.querySelectorAll(".bar-row"), function (b) {
+      b.addEventListener("click", function () { onPick(b.dataset.k); });
+    });
+  }
+
+  /* ---------- summary tables ---------- */
+  function renderGroupTable(el, groups, total, head) {
+    el.innerHTML =
+      "<thead><tr><th>" + head + '</th><th class="r">Spend</th><th class="r">Share</th>' +
+      '<th class="r">Lines</th></tr></thead><tbody>' +
+      groups.map(function (g) {
+        return "<tr><td>" + (head === "WBS element"
+          ? '<code>' + esc(g.k) + "</code>" : esc(g.k)) + "</td>" +
+          '<td class="r num">' + money(g.amt) + "</td>" +
+          '<td class="r num muted">' + (total ? (g.amt / total * 100).toFixed(1) : "0.0") + "%</td>" +
+          '<td class="r num muted">' + g.n + "</td></tr>";
+      }).join("") + "</tbody>";
+  }
+
+  /* ---------- line-item table ---------- */
+  var COLS = [
+    { k: "d", t: "Date", cls: "num" },
+    { k: "po", t: "PO", cls: "num" },
+    { k: "v", t: "Vendor" },
+    { k: "i", t: "Item" },
+    { k: "c", t: "Category" },
+    { k: "q", t: "Qty", cls: "num r" },
+    { k: "amt", t: "Amount S$", cls: "num r" }
+  ];
+  function renderItems(rows) {
+    var sorted = rows.slice().sort(function (a, b) {
+      var av, bv;
+      if (state.sort === "amt") { av = amt(a); bv = amt(b); }
+      else { av = a[state.sort]; bv = b[state.sort]; }
+      if (av == null) av = "";
+      if (bv == null) bv = "";
+      return (av < bv ? -1 : av > bv ? 1 : 0) * state.dir;
+    });
+    var pages = Math.max(1, Math.ceil(sorted.length / PAGE));
+    if (state.page >= pages) state.page = pages - 1;
+    var slice = sorted.slice(state.page * PAGE, state.page * PAGE + PAGE);
+
+    var el = document.getElementById("items-tbl");
+    if (!sorted.length) {
+      el.innerHTML = '<tbody><tr><td class="empty">No line items match these filters.</td></tr></tbody>';
+      document.getElementById("pager").innerHTML = "";
+      return;
+    }
+    el.innerHTML = "<thead><tr>" + COLS.map(function (c) {
+      var on = state.sort === c.k;
+      return '<th class="sortable ' + (c.cls || "") + '" data-k="' + c.k + '">' + c.t +
+        (on ? ' <span class="arrow">' + (state.dir > 0 ? "↑" : "↓") + "</span>" : "") + "</th>";
+    }).join("") + "</tr></thead><tbody>" + slice.map(function (r) {
+      var flags = "";
+      if (r.cur === "USD") flags += ' <span class="chip usd">USD ' + money(r.gr, 2) + "</span>";
+      if (r.cf === "low") flags += ' <span class="chip warn" title="Categorised from the supplier, not the item text">vague</span>';
+      if (r.dp) flags += ' <span class="chip good">' + r.dp + "% off</span>";
+      return "<tr>" +
+        '<td class="num">' + esc(r.d) + (r.est ? '<span class="chip warn" title="Issue date not printed on the PO; interpolated from PO sequence">est</span>' : "") + "</td>" +
+        '<td class="num">' + esc(r.po) + "</td>" +
+        "<td>" + esc(r.v) + "</td>" +
+        "<td>" + esc(r.i.length > 64 ? r.i.slice(0, 64) + "…" : r.i) + flags +
+        (r.pn ? ' <code class="muted" style="font-size:11px">' + esc(r.pn) + "</code>" : "") + "</td>" +
+        "<td>" + esc(r.c) + '<div class="muted" style="font-size:11.5px">' + esc(r.s) + "</div></td>" +
+        '<td class="r num">' + (r.q == null ? "" : r.q) + "</td>" +
+        '<td class="r num">' + money(amt(r), 2) + "</td></tr>";
+    }).join("") + "</tbody>";
+
+    Array.prototype.forEach.call(el.querySelectorAll("th.sortable"), function (th) {
+      th.addEventListener("click", function () {
+        var k = th.dataset.k;
+        if (state.sort === k) state.dir *= -1;
+        else { state.sort = k; state.dir = (k === "amt" || k === "q") ? -1 : 1; }
+        state.page = 0;
+        render();
+      });
+    });
+
+    document.getElementById("pager").innerHTML =
+      '<button type="button" id="prev"' + (state.page === 0 ? " disabled" : "") + ">Previous</button>" +
+      "<span>" + (state.page * PAGE + 1) + "–" +
+      Math.min(sorted.length, (state.page + 1) * PAGE) + " of " + sorted.length + "</span>" +
+      '<button type="button" id="next"' + (state.page >= pages - 1 ? " disabled" : "") + ">Next</button>";
+    var p = document.getElementById("prev"), n = document.getElementById("next");
+    if (p) p.addEventListener("click", function () { state.page--; render(); });
+    if (n) n.addEventListener("click", function () { state.page++; render(); });
+  }
+
+  /* ---------- static panels ---------- */
+  function renderStatic() {
+    var disc = D.quotes.filter(function (q) { return q.discount_pct_max || q.discount_amount; })
+      .sort(function (a, b) { return (+b.discount_pct_max || 0) - (+a.discount_pct_max || 0); });
+    document.getElementById("disc-tbl").innerHTML =
+      '<thead><tr><th>PO / PR</th><th class="r">Discount</th><th>Terms recorded on the quote</th></tr></thead><tbody>' +
+      disc.map(function (q) {
+        var d = q.discount_pct_max ? (+q.discount_pct_max) + "%"
+              : "S$" + money(+q.discount_amount, 2);
+        var note = (q.discount_notes || "").split(" // ")[0] || "—";
+        if (note.length > 96) note = note.slice(0, 96) + "…";
+        return "<tr><td class=\"num\">" + esc(q.linked_po || q.linked_pr) + "</td>" +
+          '<td class="r num">' + d + "</td>" +
+          '<td class="muted" style="font-size:12px">' + esc(note) + "</td></tr>";
+      }).join("") + "</tbody>";
+
+    var den = D.denied.slice().sort(function (a, b) {
+      return (+b.quoted_amount || 0) - (+a.quoted_amount || 0);
+    });
+    document.getElementById("denied-tbl").innerHTML =
+      '<thead><tr><th>Requisition</th><th class="r">Quoted value</th><th>Quote on file</th></tr></thead><tbody>' +
+      den.map(function (r) {
+        return '<tr><td class="num">' + esc(r.requisition) + "</td>" +
+          '<td class="r num">' + (r.quoted_amount
+            ? (r.quote_currency === "USD" ? "US$" : "S$") + money(+r.quoted_amount)
+            : '<span class="muted">not quoted</span>') + "</td>" +
+          '<td class="muted" style="font-size:12px">' +
+          (r.quote_files ? esc(r.quote_files.split(" | ")[0]) : "—") + "</td></tr>";
+      }).join("") + "</tbody>";
+
+    var usdN = new Set(ITEMS.filter(function (i) { return i.cur === "USD"; })
+      .map(function (i) { return i.po; })).size;
+    var low = ITEMS.filter(function (i) { return i.cf === "low"; }).length;
+    document.getElementById("provenance").innerHTML =
+      "<b>How these numbers were made.</b> Line items were parsed straight from the " +
+      "<code>LINE ITEM DETAILS</code> table of each Ariba PO PDF; every one of the 175 orders " +
+      "reconciles to its own printed total and declared line count, so nothing is estimated away. " +
+      usdN + " orders are denominated in USD and are converted at the rate in the control bar &mdash; " +
+      "the PDFs do not record the rate NTU actually settled at, so treat that slice as approximate. " +
+      "The POs carry no line-level discount, so the discount panel comes from the attached supplier " +
+      "quotes instead. " + low + " line items name only a vendor (“biobasic”, “Kyberlife”) " +
+      "rather than a product and are categorised from the supplier &mdash; they are tagged " +
+      "<span class=\"chip warn\">vague</span> in the table.";
+  }
+
+  /* ---------- orchestration ---------- */
+  function render() {
+    var rows = filtered();
+    var total = rows.reduce(function (s, r) { return s + amt(r); }, 0);
+
+    renderKpis(rows);
+    renderTrend(rows);
+    renderBars(document.getElementById("cats"), groupSum(rows, "c"), total, state.cat,
+      function (k) { state.cat = state.cat === k ? "" : k; state.sub = ""; state.page = 0; render(); });
+    renderBars(document.getElementById("vendors"), groupSum(rows, "v"), total, state.vendor,
+      function (k) { state.vendor = state.vendor === k ? "" : k; state.page = 0; render(); }, 12);
+    renderBars(document.getElementById("subs"), groupSum(rows, function (r) {
+      return state.cat ? r.s : r.c + " · " + r.s;
+    }), total, state.sub, function (k) {
+      if (!state.cat) return;
+      state.sub = state.sub === k ? "" : k; state.page = 0; render();
+    }, 14);
+    document.getElementById("sub-note").textContent = state.cat
+      ? "within " + state.cat + " — click to filter"
+      : "top 14 across all categories — pick a category above to drill in";
+
+    renderGroupTable(document.getElementById("wbs-tbl"),
+      groupSum(rows, function (r) { return r.w || "(not stated)"; }), total, "WBS element");
+    renderGroupTable(document.getElementById("gl-tbl"),
+      groupSum(rows, function (r) { return r.gl || "(not stated)"; }), total, "GL account");
+
+    document.getElementById("tbl-note").textContent =
+      rows.length + " of " + ITEMS.length + " lines shown";
+    renderItems(rows);
+
+    var dirty = !!(state.cat || state.sub || state.vendor || state.req || state.wbs || state.q ||
+      state.from !== MONTHS[0] || state.to !== MONTHS[MONTHS.length - 1]);
+    document.getElementById("reset").disabled = !dirty;
+  }
+
+  /* ---------- wiring ---------- */
+  function fillSelect(id, values, current) {
+    var el = document.getElementById(id);
+    values.forEach(function (v) {
+      var o = document.createElement("option");
+      o.value = v; o.textContent = id === "from" || id === "to" ? monthLabel(v) : v;
+      if (v === current) o.selected = true;
+      el.appendChild(o);
+    });
+  }
+  fillSelect("from", MONTHS, state.from);
+  fillSelect("to", MONTHS, state.to);
+  fillSelect("req", uniq(ITEMS.map(function (i) { return i.rq; }).filter(Boolean)), "");
+  fillSelect("wbs", uniq(ITEMS.map(function (i) { return i.w; }).filter(Boolean)), "");
+
+  document.querySelectorAll(".seg button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      state.basis = b.dataset.basis;
+      document.querySelectorAll(".seg button").forEach(function (o) {
+        o.setAttribute("aria-pressed", String(o === b));
+      });
+      render();
+    });
+  });
+  document.getElementById("fx").addEventListener("input", function (e) {
+    var v = parseFloat(e.target.value);
+    if (!isNaN(v) && v > 0) { state.fx = v; render(); }
+  });
+  ["from", "to", "req", "wbs"].forEach(function (id) {
+    document.getElementById(id).addEventListener("change", function (e) {
+      state[id] = e.target.value;
+      if (id === "from" && state.to < state.from) { state.to = state.from; document.getElementById("to").value = state.to; }
+      if (id === "to" && state.to < state.from) { state.from = state.to; document.getElementById("from").value = state.from; }
+      state.page = 0; render();
+    });
+  });
+  var qTimer;
+  document.getElementById("q").addEventListener("input", function (e) {
+    clearTimeout(qTimer);
+    qTimer = setTimeout(function () { state.q = e.target.value; state.page = 0; render(); }, 140);
+  });
+  document.getElementById("reset").addEventListener("click", function () {
+    state.cat = state.sub = state.vendor = state.req = state.wbs = state.q = "";
+    state.from = MONTHS[0]; state.to = MONTHS[MONTHS.length - 1]; state.page = 0;
+    document.getElementById("q").value = "";
+    ["from", "to", "req", "wbs"].forEach(function (id) {
+      document.getElementById(id).value = state[id];
+    });
+    render();
+  });
+
+  var span = monthLabel(MONTHS[0]) + " – " + monthLabel(MONTHS[MONTHS.length - 1]);
+  document.getElementById("lede").textContent =
+    "Every purchase order raised against the lab's grant lines between " + span +
+    ", read out of the Ariba PO PDFs and broken down by what was actually bought.";
+
+  renderStatic();
+  render();
+  window.addEventListener("resize", function () { renderTrend(filtered()); });
+})();
+</script>

@@ -1,0 +1,182 @@
+﻿po_number,requisition,internal_id,supplier,title,pr_status,po_status,amount,currency,po_pdf,po_pdf_captured,attachment_count,attachments
+9100265891,PR665566,,,nanopore,Ordered,,,,,NO,0,
+9100268265,PR669163,EP478108,Sigma-Aldrich Pte Ltd,PCR,Received,Received,,,9100268265.pdf,yes,0,
+9100268266,PR669163,EP478109,Life Technologies Holdings Pte Ltd,PCR,Received,Received,,,9100268266.pdf,yes,0,
+9100268267,PR669163,EP478110,BIO BASIC ASIA PACIFIC PTE. LTD.,PCR,Received,Received,,,9100268267.pdf,yes,0,
+9100270703,PR673241,EP481293,KYBERLIFE PTE LTD,bio-rad,Received,Received,,,9100270703.pdf,yes,0,
+9100270976,PR673666,,,oligo pool synthesis and DNA cloning services,Ordered,,,,,NO,0,
+9100273892,PR678356,EP485412,"Wuxi NEST Biotechnology Co., Ltd.",nest,Received,Received,,,9100273892.pdf,yes,0,
+9100274711,PR679830,EP486514,KYBERLIFE PTE LTD,Water Heating Bath Wasserbad 18L 99°C + 10kg Beads,Received,Received,,,9100274711.pdf,yes,0,
+9100275902,PR681642,EP488024,GAIA SCIENCE PTE LTD,installation of vacuum,Received,Received,,,9100275902.pdf,yes,0,
+9100278178,PR685072,EP490987,KYBERLIFE PTE LTD,Crating service for shipment,Received,Received,,,9100278178.pdf,yes,0,
+9100280535,PR689400,EP494000,PROBIOSCIENCE TECHNOLOGIES,PT179,Received,Received,,,9100280535.pdf,yes,0,
+9100280567,PR689456,EP494038,ZUELLIG PHARMA PTE. LTD.,CYTOFIX/CYTOPERM BUF KIT,Received,Received,,,9100280567.pdf,yes,1,9100280567_quote_QT100807286419804.pdf
+9100282042,PR691117,EP495952,SPECTRA-TEKNIK (S) PTE LTD,Rocker 400 Oil Free Vacuum Pump,Received,Received,,,9100282042.pdf,yes,1,9100282042_quote_Q-020116-181225-R1 - NTU-SBS - Prof Richard.pdf
+9100283631,PR694024,EP497988,Sigma-Aldrich Pte Ltd,matrigel,Received,Received,,,9100283631.pdf,yes,0,
+9100283719,PR694318,EP498110,STEMCELL TECHNOLOGIES SINGAPORE,Laminin-521 And cloneR2,Received,Received,,,9100283719.pdf,yes,1,9100283719_quote_Q-652767.pdf
+9100283865,PR694734,EP498284,"BOSTON BIOPRODUCTS, INC",40% PEG8000 (w/v)  1.2M NaCl - 1L,Received,Received,,,9100283865.pdf,yes,1,9100283865_quote_251229NAG-1_Richard She_Nanyang Technological University.pdf
+9100285347,PR697118,EP500196,NEW ENGLAND BIOLABS PTE LTD,teln,Received,Received,,,9100285347.pdf,yes,0,
+9100285348,PR697103,EP500197,BIO BASIC ASIA PACIFIC PTE. LTD.,biobasic,Received,Received,,,9100285348.pdf,yes,0,
+9100286021,PR697120,,,antibody,Ordered,,,,,NO,3,9100286021_quote_260123NAG-1_Richard She_Nanyang Technological University.pdf; 9100286021_quote_Abcam Quote RD4073752133.pdf; 9100286021_quote_antibody quotation thermofisher.pdf
+9100286022,PR697120,,,antibody,Ordered,,,,,NO,0,
+9100286023,PR697120,,,antibody,Ordered,,,,,NO,0,
+9100286024,PR698465,EP501099,SINGLAB TECHNOLOGIES PTE LTD,sox2 antibody,Received,Received,,,9100286024.pdf,yes,0,
+9100286844,PR699771,EP502120,DKSH Singapore Pte Ltd,repliQa HiFi ToughMix  25R,Received,Received,,,9100286844.pdf,yes,1,9100286844_quote_INS0031_Quantabio_repliQa HiFi_25 Reactions_NTU_SBS_She Lab_Kai He_Cw.pdf
+9100287292,PR700441,EP502721,TTM SCIENTIFIC SUPPLY PTE LTD,Beakers  bench disposal stands and Storage Bins,Received,Received,,,9100287292.pdf,yes,1,9100287292_quote_TTM Quotation-20260203-Lab Consumable.pdf
+9100287656,PR701121,EP503211,Sigma-Aldrich Pte Ltd,ultra low attachment plates,Received,Received,,,9100287656.pdf,yes,0,
+9100287823,PR701381,EP503409,SCIMED (ASIA) PTE LTD,Incubator Trays,Received,Received,,,9100287823.pdf,yes,1,9100287823_quote_Quote_SHelf.pdf
+9100288467,PR702459,EP504229,Life Technologies Holdings Pte Ltd,thermofisher antibodies,Received,Received,,,9100288467.pdf,yes,0,
+9100288705,PR702759,EP504533,BGI TECH SOLUTIONS (HONG KONG),DNBSEQ,Received,Received,,,9100288705.pdf,yes,1,9100288705_quote_Q20260130000094_NTU_Premade library_Richard She_PE150 1lane_20260130.pdf
+9100289720,PR704312,EP505888,GA International INC.,cryolables,Received,Received,,,9100289720.pdf,yes,1,9100289720_quote_Q920099-MCOL_Richard She_Nanyang Technological University.pdf
+9100289760,PR704393,EP505957,JOINT ANALYTICAL SYSTEMS (S) PTE,PU Clear Tubing for CO2 Incubator,Received,Received,,,9100289760.pdf,yes,1,9100289760_quote_NTU_SBS_Prof Richard_CO2 Cyl Regulator_Tubing_JAS200226M_R1.pdf
+9100290751,PR705927,EP507225,TTM SCIENTIFIC SUPPLY PTE LTD,Orbital Shaker and Sockets,Received,Received,,,9100290751.pdf,yes,1,9100290751_quote_TTM Quotation-20260225-Lab Consumable -NTU.pdf
+9100291021,PR706441,EP507580,Life Technologies Holdings Pte Ltd,GMEM,Received,Received,,,9100291021.pdf,yes,0,
+9100291080,PR706354,EP507654,NEW ENGLAND BIOLABS PTE LTD,AgeI,Received,Received,,,9100291080.pdf,yes,0,
+9100291081,PR706499,EP507655,Life Technologies Holdings Pte Ltd,KSR,Received,Received,,,9100291081.pdf,yes,0,
+9100291470,PR707245,EP508157,VAZYME BIOTECHNOLOGY SINGAPORE PTE,VAZYME Kit,Received,Received,,,9100291470.pdf,yes,1,9100291470_quote_VAZLBH260302-XT-Quotation.pdf
+9100291520,PR707359,EP508218,Plasmidsaurus Inc.,plasmidsaurus,Received,Received,,,9100291520.pdf,yes,1,9100291520_quote_Plasmidsaurus_Quote_26H04-042619.pdf
+9100292035,PR708183,EP508878,The Jackson Laboratory.,IPSC  KOLF2.2J,Received,Received,,,9100292035.pdf,yes,1,9100292035_quote_SQ049076 DAP.pdf
+9100292036,PR708179,EP508879,Sigma-Aldrich Pte Ltd,Corning® aspiration pipettes,Received,Received,,,9100292036.pdf,yes,0,
+9100292292,PR708638,EP509245,SINGLAB TECHNOLOGIES PTE LTD,cas9 antibody,Received,Received,,,9100292292.pdf,yes,1,9100292292_quote_Zhao XueTing Q65588.pdf
+9100292300,PR708350,EP509253,NEW ENGLAND BIOLABS PTE LTD,r3.1,Received,Received,,,9100292300.pdf,yes,0,
+9100292301,PR708349,EP509254,NEW ENGLAND BIOLABS PTE LTD,XmaI,Received,Received,,,9100292301.pdf,yes,0,
+9100292387,PR708744,EP509363,KYBERLIFE PTE LTD,Kyberlife,Ordered,Ordered,,,9100292387.pdf,yes,0,
+9100292665,PR709161,EP509715,INTEGRATED DNA TECHNOLOGIES,IDT orders,Received,Received,,,9100292665.pdf,yes,0,
+9100293268,PR710037,EP510460,Twist Bioscience Corporation,twist DNA,Received,Received,,,9100293268.pdf,yes,1,9100293268_quote_Q-623253.pdf
+9100293275,PR709972,EP510469,Life Technologies Holdings Pte Ltd,mesDA protocol,Receiving,Receiving,,,9100293275.pdf,yes,0,
+9100293519,PR710477,EP510768,TTM SCIENTIFIC SUPPLY PTE LTD,hydrophobic barrier pen immunohistochemistry,Received,Received,,,9100293519.pdf,yes,1,9100293519_quote_TTM Quotation-20260316-Lab Consumable -NTU.pdf
+9100293622,PR710649,EP510897,NEW ENGLAND BIOLABS PTE LTD,TelN prototelomerase,Received,Received,,,9100293622.pdf,yes,0,
+9100293762,PR710861,EP511100,Sigma-Aldrich Pte Ltd,donkey serum,Received,Received,,,9100293762.pdf,yes,0,
+9100293959,PR710862,EP511362,GENOMAX TECHNOLOGIES PTE. LTD.,sgCD81-PE antibody,Received,Received,,,9100293959.pdf,yes,1,9100293959_quote_2026056066-NTUSBS-ZhaoXueTing.pdf
+9100294301,PR711684,EP511780,MILTENYI BIOTEC ASIA PACIFIC,Miltenyi Biotec mesDA Order,Received,Received,,,9100294301.pdf,yes,0,
+9100294394,PR711805,EP511901,Sigma-Aldrich Pte Ltd,heparin lactate,Received,Received,,,9100294394.pdf,yes,0,
+9100294432,PR711899,EP511948,Life Technologies Holdings Pte Ltd,accutase,Received,Received,,,9100294432.pdf,yes,0,
+9100295124,PR712929,EP512827,Sigma-Aldrich Pte Ltd,matrigel,Received,Received,,,9100295124.pdf,yes,0,
+9100296375,PR715469,EP514418,SINGLAB TECHNOLOGIES PTE LTD,mesDA Antibodies from Singlab,Received,Received,,,9100296375.pdf,yes,1,9100296375_quote_Aidan McMorrow Q65792 - Revision.pdf
+9100296376,PR714070,EP514419,Merck Pte Ltd,LMX1A,Received,Received,,,9100296376.pdf,yes,0,
+9100296607,PR715808,EP514721,Life Technologies Holdings Pte Ltd,dpbs not cts,Received,Received,,,9100296607.pdf,yes,0,
+9100296951,PR716282,EP515138,Sigma-Aldrich Pte Ltd,HSA,Received,Received,,,9100296951.pdf,yes,0,
+9100296966,PR716346,EP515158,Sigma-Aldrich Pte Ltd,chir,Received,Received,,,9100296966.pdf,yes,0,
+9100297532,PR717245,EP515899,INTEGRATED DNA TECHNOLOGIES,cas9,Received,Received,,,9100297532.pdf,yes,0,
+9100298364,PR718627,EP516968,STEMCELL TECHNOLOGIES SINGAPORE,mTeSR,Received,Received,,,9100298364.pdf,yes,1,9100298364_quote_Q-670248.pdf
+9100298794,PR719436,EP517542,PROBIOSCIENCE TECHNOLOGIES,PT179,Received,Received,,,9100298794.pdf,yes,1,9100298794_quote_PBQ-211331.pdf
+9100298992,PR719783,EP517791,NEW ENGLAND BIOLABS PTE LTD,Exonuclease V,Received,Received,,,9100298992.pdf,yes,1,9100298992_quote_50020558.pdf
+9100299136,PR720027,EP517976,Sigma-Aldrich Pte Ltd,Ascorbic acid,Received,Received,,,9100299136.pdf,yes,0,
+9100299172,PR720095,,,DMEM-F12,Ordered,,,,,NO,0,
+9100299477,PR720368,EP518378,"Innovative Cell Technologies, Inc",ACCUTASE,Ordered,Ordered,,,9100299477.pdf,yes,1,9100299477_quote_LAS042326.NTU.Singapore.quote.pdf
+9100299478,PR720368,EP518379,"Innovative Cell Technologies, Inc",ACCUTASE,Ordered,Ordered,,,9100299478.pdf,yes,0,
+9100300484,PR720911,EP519719,Life Technologies Holdings Pte Ltd,accutase,Received,Received,,,9100300484.pdf,yes,0,
+9100300486,PR721546,EP519721,NEW ENGLAND BIOLABS PTE LTD,EnClose TelN,Received,Received,,,9100300486.pdf,yes,1,9100300486_quote_SQ-50020657.pdf
+9100300779,PR722773,EP520108,HORME HARDWARE PTE LTD,Wrench 12',Ordered,Ordered,,,9100300779.pdf,yes,0,
+9100301014,PR723133,EP520402,Life Technologies Holdings Pte Ltd,Tris buffer,Received,Received,,,9100301014.pdf,yes,0,
+9100302277,PR725026,EP521969,INTEGRATED DNA TECHNOLOGIES,TelN New Primers,Received,Received,,,9100302277.pdf,yes,0,
+9100302785,PR724854,EP522610,Life Technologies Holdings Pte Ltd,Thermo mesDA Reagents,Receiving,Receiving,,,9100302785.pdf,yes,0,
+9100302920,PR726140,EP522805,MILTENYI BIOTEC ASIA PACIFIC,TF staining buffer set,Received,Received,,,9100302920.pdf,yes,1,9100302920_quote_Quotation_0070396449_XueTing_NTUSBS.pdf
+9100302921,PR725952,EP522806,Twist Bioscience Corporation,ASD Oligo Pool Twist,Received,Received,,,9100302921.pdf,yes,1,9100302921_quote_Q-660544.pdf
+9100303170,PR726513,EP523125,INTEGRATED DNA TECHNOLOGIES,ASD_Screen_CRISPRia_Primers,Received,Received,,,9100303170.pdf,yes,0,
+9100303172,PR726552,EP523127,NEW ENGLAND BIOLABS PTE LTD,PCR cleanup kit,Received,Received,,,9100303172.pdf,yes,0,
+9100303425,PR726767,EP523437,Life Technologies Holdings Pte Ltd,Secondary Antibody for mesDA Staining,Received,Received,,,9100303425.pdf,yes,0,
+9100303427,PR726695,EP523440,Bio-Rad Laboratories (Singapore) Pte Ltd,Cuvettes,Received,Received,,,9100303427.pdf,yes,1,9100303427_quote_QQ830331-CPQ26.pdf
+9100303740,PR727255,EP523826,PROBIOSCIENCE TECHNOLOGIES,dbCAMP from Probioscience,Received,Received,,,9100303740.pdf,yes,1,9100303740_quote_PBQ-211592.pdf
+9100303745,PR727258,EP523839,STEMCELL TECHNOLOGIES SINGAPORE,mTeSR Q-676755,Received,Received,,,9100303745.pdf,yes,1,9100303745_quote_Q-676755.pdf
+9100303790,PR727518,EP523903,NEW ENGLAND BIOLABS PTE LTD,mluI,Received,Received,,,9100303790.pdf,yes,1,9100303790_quote_SQ-50020964.pdf
+9100303829,PR727580,EP523957,Life Technologies Holdings Pte Ltd,Laminin-521,Received,Received,,,9100303829.pdf,yes,0,
+9100303830,PR727577,EP523959,AXIL SCIENTIFIC PTE LTD,DAPT,Received,Received,,,9100303830.pdf,yes,1,9100303830_quote_Quote-ZY182076.pdf
+9100303879,PR727675,EP524026,Sigma-Aldrich Pte Ltd,KAPA SYBR FAST,Received,Received,,,9100303879.pdf,yes,0,
+9100304035,PR727874,EP524249,INTEGRATED DNA TECHNOLOGIES,Doggybone Trial,Received,Received,,,9100304035.pdf,yes,0,
+9100304109,PR727529,EP524337,INTEGRATED DNA TECHNOLOGIES,sgRNA-safe harbor,Received,Received,,,9100304109.pdf,yes,0,
+9100304410,PR728458,EP524733,NEW ENGLAND BIOLABS PTE LTD,Esp3I & PaqCI,Received,Received,,,9100304410.pdf,yes,1,9100304410_quote_QN_50021003.pdf
+9100304411,PR728247,EP524734,Life Technologies Holdings Pte Ltd,ezDNAse,Received,Received,,,9100304411.pdf,yes,0,
+9100304413,PR728482,EP524736,Sigma-Aldrich Pte Ltd,Corning Ultra Low Attachment Plates,Received,Received,,,9100304413.pdf,yes,0,
+9100304744,PR728839,EP525160,STEMCELL TECHNOLOGIES SINGAPORE,Neurocult x6 (buy 5 get 1 free),Received,Received,,,9100304744.pdf,yes,1,9100304744_quote_Q-683886_final.pdf
+9100304845,PR729153,EP525303,Sigma-Aldrich Pte Ltd,Poly-ʟ-Ornithine,Received,Received,,,9100304845.pdf,yes,0,
+9100305488,PR730186,EP526133,INTEGRATED DNA TECHNOLOGIES,Hairpin+primers,Received,Received,,,9100305488.pdf,yes,0,
+9100306191,PR731269,EP527017,AXIL SCIENTIFIC PTE LTD,DNA stain dye,Received,Received,,,9100306191.pdf,yes,0,
+9100306196,PR731296,EP527026,TECHNICAIR SINGAPORE SERVICES PTE.,BSC relocate,Received,Received,,,9100306196.pdf,yes,1,9100306196_quote_TASSG090626-03 NTU.pdf
+9100306374,PR731572,EP527248,Twist Bioscience Corporation,Twist gblock poly A,Received,Received,,,9100306374.pdf,yes,1,9100306374_quote_Q-672884.pdf
+9100306395,PR731611,EP527275,NEW ENGLAND BIOLABS PTE LTD,Monarch buy 2 free 1 event,Received,Received,,,9100306395.pdf,yes,1,9100306395_quote_SQ-50021182.pdf
+9100306410,PR731667,EP527309,Twist Bioscience Corporation,Twist gblock Dr Chen Gao Bin,Received,Received,,,9100306410.pdf,yes,1,9100306410_quote_Q-672884.pdf
+9100306910,PR728840,EP527985,Life Technologies Holdings Pte Ltd,qPCR Plates,Received,Received,,,9100306910.pdf,yes,0,
+9100306950,PR732633,EP528034,Life Technologies Holdings Pte Ltd,SOC recovery medium,Received,Received,,,9100306950.pdf,yes,0,
+9100307199,PR733084,EP528342,Sigma-Aldrich Pte Ltd,KODone PCR master mix,Received,Received,,,9100307199.pdf,yes,0,
+9100307586,PR733706,EP528860,DEVELOPMENTAL STUDIES HYBRIDOMA BANK,EN1 Antibody,Received,Received,,,9100307586.pdf,yes,1,9100307586_quote_Estimate 11220.pdf
+9100307686,PR733779,EP528979,INTEGRATED DNA TECHNOLOGIES,PAX6_3HA_F7_splitALFA_polyA,Received,Received,,,9100307686.pdf,yes,0,
+9100307845,PR734014,EP529190,STEM CELL SOCIETY SINGAPORE,mTeSR,Canceling,Ordered,,,9100307845.pdf,yes,1,9100307845_quote_Q-676756.pdf
+9100307859,PR734124,EP529208,INTEGRATED DNA TECHNOLOGIES,TelN extended primers,Received,Received,,,9100307859.pdf,yes,0,
+9100307955,PR734259,EP529322,Life Technologies Holdings Pte Ltd,TGFb3  FGF8b,Receiving,Receiving,,,9100307955.pdf,yes,0,
+9100307956,PR734252,EP529323,KYBERLIFE PTE LTD,zymo RNA miniprep kit,Received,Received,,,9100307956.pdf,yes,0,
+9100308169,PR734484,EP529584,SPD SCIENTIFIC PTE LTD,ZYMOPURE PLASMID  MAXIPREP (10 PREPS) RT,Received,Received,,,9100308169.pdf,yes,1,9100308169_quote_Q126300419 R1 - BE1S_SALES QUOTATION-20260623-084220.pdf
+9100308170,PR734618,EP529585,SCIENCEWERKE PTE LTD,Mirus,Received,Received,,,9100308170.pdf,yes,1,9100308170_quote_SW26-0625.pdf
+9100308256,PR734776,EP529700,INTEGRATED DNA TECHNOLOGIES,Oligo Plate GaoBin,Received,Received,,,9100308256.pdf,yes,3,9100308256_quote_Discount Statement 160581.pdf; 9100308256_quote_QTE-835476_Rev2.pdf; 9100308256_quote_example_plate-file-upload GB20260618.xls
+9100308257,PR734774,EP529701,INTEGRATED DNA TECHNOLOGIES,GaoBin Oligo,Ordered,Ordered,,,9100308257.pdf,yes,0,
+9100308598,PR734867,EP530117,ABCAM SINGAPORE PTE. LTD.,FOXG1-100ul,Received,Received,,,9100308598.pdf,yes,0,
+9100308689,PR735283,EP530229,INTEGRATED DNA TECHNOLOGIES,Pansio RNA based Hairpin GCAA,Received,Received,,,9100308689.pdf,yes,0,
+9100309150,PR735762,EP530823,INTEGRATED DNA TECHNOLOGIES,TKR PCR primers,Ordered,Ordered,,,9100309150.pdf,yes,0,
+9100309165,PR736099,EP530843,Twist Bioscience Corporation,twist cre sequence,Received,Received,,,9100309165.pdf,yes,1,9100309165_quote_Q-682093.pdf
+9100310655,PR734591,EP532783,SINGLAB TECHNOLOGIES PTE LTD,ALDH1A1 antibody,Received,Received,,,9100310655.pdf,yes,1,9100310655_quote_Q66613-Aidan Mcmorrow.pdf
+9100310656,PR738581,EP532784,NEW ENGLAND BIOLABS PTE LTD,PaqC1,Received,Received,,,9100310656.pdf,yes,1,9100310656_quote_SQ-50021551.pdf
+9100311270,PR738442,EP533574,INTEGRATED DNA TECHNOLOGIES,sgRNAs for gene tagging,Received,Received,,,9100311270.pdf,yes,0,
+9100311280,PR739626,EP533584,INTEGRATED DNA TECHNOLOGIES,nNFIX-new-primers-Gibson,Received,Received,,,9100311280.pdf,yes,0,
+9100311302,PR739666,EP533613,Life Technologies Holdings Pte Ltd,SYBR,Received,Received,,,9100311302.pdf,yes,0,
+9100311303,PR739650,EP533614,CELESTIAL SPHERE TRADING PTE LTD,TH Antibody,Received,Received,,,9100311303.pdf,yes,1,9100311303_quote_Q26070802.pdf
+9100311597,PR740117,EP534011,Sigma-Aldrich Pte Ltd,Costar Centrifuge Filters,Received,Received,,,9100311597.pdf,yes,0,
+9100311598,PR740111,EP534012,ABCAM SINGAPORE PTE. LTD.,SOX6 Antibody,Received,Received,,,9100311598.pdf,yes,0,
+9100311875,PR737312,EP534359,STEMCELL TECHNOLOGIES SINGAPORE,mTeSR,Received,Received,,,9100311875.pdf,yes,1,9100311875_quote_Q-676756  _1.pdf
+9100311882,PR740611,EP534371,PROBIOSCIENCE TECHNOLOGIES,MCE small molecules,Received,Received,,,9100311882.pdf,yes,1,9100311882_quote_PBQ-212060_V1_ProbioscienceQuote.pdf
+9100311942,PR740647,EP534442,Life Technologies Holdings Pte Ltd,accutase,Received,Received,,,9100311942.pdf,yes,0,
+9100311968,PR740728,EP534473,Sigma-Aldrich Pte Ltd,Electroporation Cuvettes 4mm,Received,Received,,,9100311968.pdf,yes,0,
+9100312095,PR735620,EP534632,INTEGRATED DNA TECHNOLOGIES,Cas nuclease,Received,Received,,,9100312095.pdf,yes,0,
+9100312818,PR741876,EP535588,Plasmidsaurus Inc.,plasmidsaurus,Received,Received,,,9100312818.pdf,yes,1,9100312818_quote_Plasmidsaurus_Quote_26N22-035120.pdf
+9100313199,PR742574,EP536052,SPECTRATECH PTE. LTD.,Replacement of Existing CKX Lamp Socket,Received,Received,,,9100313199.pdf,yes,1,9100313199_quote_ST-Q20074225 NTU SBS_Microscope_bulb.pdf
+9100313229,PR742656,EP536096,INTEGRATED DNA TECHNOLOGIES,Primer_Richard,Received,Received,,,9100313229.pdf,yes,0,
+9100313332,PR742813,EP536236,Life Technologies Holdings Pte Ltd,Opti-Mem Phenol Free,Received,Received,,,9100313332.pdf,yes,0,
+9100313444,PR742979,EP536383,Addgene Inc.,addgene plasmid,Received,Received,,,9100313444.pdf,yes,0,
+9100313657,PR741631,EP536715,NEW ENGLAND BIOLABS PTE LTD,Monarch order,Received,Received,,,9100313657.pdf,yes,1,9100313657_quote_SQ-50021757.pdf
+9100313748,PR743457,EP536853,Life Technologies Holdings Pte Ltd,N2 supplement,Received,Received,,,9100313748.pdf,yes,0,
+9100313821,PR743598,EP536938,Sigma-Aldrich Pte Ltd,KOD ONE,Received,Received,,,9100313821.pdf,yes,0,
+9100313886,PR742929,EP537018,INTEGRATED DNA TECHNOLOGIES,Primers_DoggyBone_PCR,Received,Received,,,9100313886.pdf,yes,0,
+9100313917,PR743713,EP537057,INTEGRATED DNA TECHNOLOGIES,Hairpin C for EcoRI and BamHI,Received,Received,,,9100313917.pdf,yes,0,
+9100314602,PR743868,EP538076,MILTENYI BIOTEC ASIA PACIFIC,SHH,Received,Received,,,9100314602.pdf,yes,1,9100314602_quote_Quotation_0070396883_Aidan_NTU.pdf
+9100314859,PR745204,EP538421,SCIENCEWERKE PTE LTD,MIRUS TRANSIT LT,Received,Received,,,9100314859.pdf,yes,1,9100314859_quote_SW26-0755.pdf
+9100314866,PR745246,EP538428,TTM SCIENTIFIC SUPPLY PTE LTD,Bulk taobao order,Ordered,Shipped,,,9100314866.pdf,yes,1,9100314866_quote_TTM Quotation-20260803-Lab Consumable.pdf
+9100315280,PR745824,EP538954,SARTORIUS STEDIM SINGAPORE PTE.,PEIpro,Received,Received,,,9100315280.pdf,yes,1,9100315280_quote_peipro.pdf
+9100315629,PR745665,EP539469,Life Technologies Holdings Pte Ltd,Novex 6% TBE Gel,Ordered,Ordered,,,9100315629.pdf,yes,0,
+9100315630,PR745601,EP539470,KYBERLIFE PTE LTD,Magnetic beads for DNA purification - 50ML,Received,Received,,,9100315630.pdf,yes,0,
+9100315631,PR745978,EP539471,NEW ENGLAND BIOLABS PTE LTD,DNA ligase + BamHI + Esp3I,Received,Received,,,9100315631.pdf,yes,2,9100315631_quote_BamH1 n Esp3I.pdf; 9100315631_quote_T4 dna ligase.pdf
+9100315635,PR745651,EP539475,INTEGRATED DNA TECHNOLOGIES,HPA for BamH1 and EcoR1 (GB),Received,Received,,,9100315635.pdf,yes,0,
+9100315636,PR746420,EP539481,Sigma-Aldrich Pte Ltd,Low-Bind Tubes,Ordered,Ordered,,,9100315636.pdf,yes,0,
+9100315754,PR746423,EP539660,Life Technologies Holdings Pte Ltd,Qubit Reagents,Ordered,Ordered,,,9100315754.pdf,yes,0,
+9100315789,PR745041,EP539701,INTEGRATED DNA TECHNOLOGIES,Genotyping primers,Ordered,Ordered,,,9100315789.pdf,yes,0,
+9100315916,PR745736,EP539870,STEMCELL TECHNOLOGIES SINGAPORE,cloner2,Received,Received,,,9100315916.pdf,yes,1,9100315916_quote_Q-702696.pdf
+9100316298,PR747502,EP540352,INTEGRATED DNA TECHNOLOGIES,Cas nuclease 500ug,Ordered,Ordered,,,9100316298.pdf,yes,0,
+9100316319,PR747519,EP540374,NEW ENGLAND BIOLABS PTE LTD,Monarch DNA Gel Extraction x PCR cleanup (Buy 2 free 1),Ordered,Ordered,,,9100316319.pdf,yes,1,9100316319_quote_SQ-50022022.pdf
+9100316336,PR746982,EP540393,Addgene Inc.,Addgene_13/Aug,Received,Received,,,9100316336.pdf,yes,0,
+9100316789,PR748184,EP541046,SPD SCIENTIFIC PTE LTD,DNA/RNA Shield,Ordered,Ordered,,,9100316789.pdf,yes,0,
+9100317433,PR748998,EP541936,Life Technologies Holdings Pte Ltd,bulk order thermo,Ordered,Ordered,,,9100317433.pdf,yes,1,9100317433_quote_D6349034_Consumable_NTU SBS_Xueting.pdf
+9100317655,PR749405,EP542235,INTEGRATED DNA TECHNOLOGIES,sgRNA GAPDH,Ordered,Ordered,,,9100317655.pdf,yes,0,
+9100317797,PR749892,EP542485,INTEGRATED DNA TECHNOLOGIES,barcode_IDT,Ordered,Ordered,,,9100317797.pdf,yes,0,
+9100317864,PR749323,EP542580,VIVACELL CULTURE PTE LTD,Laminin-111,Ordered,Ordered,,,9100317864.pdf,yes,0,
+9100317971,PR750249,EP542707,MIRXES PTE. LTD.,Mirxes Sequencing,Ordered,Ordered,,,9100317971.pdf,yes,1,9100317971_quote_Richard She Quotation 20001170.pdf
+9100318044,PR750360,EP542795,INTEGRATED DNA TECHNOLOGIES,Hairpin 3,Ordered,Ordered,,,9100318044.pdf,yes,0,
+9100318045,PR750362,EP542796,BIOMEDIX SINGAPORE PTE LTD,G418,Ordered,Ordered,,,9100318045.pdf,yes,0,
+9100318071,PR750364,EP542826,SIMPLY SCIENCE,E.Z.N.A Plasmid DNA Mini Kit I  200 preps,Received,Received,,,9100318071.pdf,yes,1,9100318071_quote_Quote SSQ26-5090.pdf
+9100318430,PR747594,EP543303,GAIA SCIENCE PTE LTD,Gaia Science tissue culture hood tubing system,Received,Received,,,9100318430.pdf,yes,1,9100318430_quote_NTU10055134 REV1_To Provide Site Visit_Assessment for BSC Tube Connector.pdf
+9100318959,PR749913,EP543987,Life Technologies Holdings Pte Ltd,lipofectamine stem,Received,Received,,,9100318959.pdf,yes,0,
+9100319113,PR752015,EP544244,NEW ENGLAND BIOLABS PTE LTD,NEBuilder,Received,Received,,,9100319113.pdf,yes,1,9100319113_quote_SQ-50022202.pdf
+9100319343,PR752325,EP544537,KYBERLIFE PTE LTD,Wall Mounted Pipettor Hanger,Ordered,Ordered,,,9100319343.pdf,yes,1,9100319343_quote_wall_mount_pipette_quote.pdf
+9100319346,PR751713,EP544540,KYBERLIFE PTE LTD,Anti-Girk2 Antibody,Ordered,Ordered,,,9100319346.pdf,yes,1,9100319346_quote_GIRK2_quote.pdf
+9100319936,PR753296,EP545308,TTM SCIENTIFIC SUPPLY PTE LTD,Taobao order,Ordered,Shipped,,,9100319936.pdf,yes,1,9100319936_quote_TTM Quotation-20260903-Lab Consumable-NTU -.pdf
+9100320097,PR752108,EP545547,Plasmidsaurus Inc.,dinocoin,Ordered,Ordered,,,9100320097.pdf,yes,1,9100320097_quote_Plasmidsaurus_Quote_26U05-053113.pdf
+9100320185,PR753763,EP545706,"Wuxi NEST Biotechnology Co., Ltd.",NEST lab consumables,Ordered,Ordered,,,9100320185.pdf,yes,1,9100320185_quote_PI-202609SG07001.pdf
+9100320202,PR753773,EP545727,AXIL SCIENTIFIC PTE LTD,Chiron,Ordered,Ordered,,,9100320202.pdf,yes,1,9100320202_quote_Quote-ZY185695.pdf
+9100320481,PR754249,EP546091,Life Technologies Holdings Pte Ltd,TypLE,Ordered,Ordered,,,9100320481.pdf,yes,0,
+9100320895,PR753775,EP546636,Life Technologies Holdings Pte Ltd,FGF8b,Ordered,Ordered,,,9100320895.pdf,yes,0,
+9100320943,PR755070,EP546698,INTEGRATED DNA TECHNOLOGIES,IDT_Primers,Ordered,Ordered,,,9100320943.pdf,yes,0,
+9100320990,PR755114,EP546760,NEW ENGLAND BIOLABS PTE LTD,Circularization of linear DNA + strand removal for a ss linear circula,Ordered,Ordered,,,9100320990.pdf,yes,1,9100320990_quote_NEB T7 exonuclease - Nb.Btsl - Nb.BsrDI.pdf
+9100321080,PR755235,EP546876,Life Technologies Holdings Pte Ltd,accutase,Ordered,Ordered,,,9100321080.pdf,yes,0,
+9100321172,PR755414,EP546981,GENOMAX TECHNOLOGIES PTE. LTD.,HA antibody,Ordered,Ordered,,,9100321172.pdf,yes,1,9100321172_quote_2026057462-NTUSBS-Zhao Xueting.pdf
+9100321341,PR755280,EP547272,Life Technologies Holdings Pte Ltd,DPBS +Ca/+Mg,Ordered,Ordered,,,9100321341.pdf,yes,0,
+9100321357,PR755738,EP547288,NEW ENGLAND BIOLABS PTE LTD,T4 DNA ligase buffer,Ordered,Ordered,,,9100321357.pdf,yes,1,9100321357_quote_T4 DNA ligase buffer.pdf
+9100321494,PR755948,EP547461,INTEGRATED DNA TECHNOLOGIES,PS bonded keppel primers,Ordered,Ordered,,,9100321494.pdf,yes,0,
+9100321618,PR756083,EP547625,HAOYUAN CHEMEXPRESS CO LIMITED,4-Hydroxytamoxifen,Ordered,Ordered,,,9100321618.pdf,yes,1,9100321618_quote_HY-20260915001-mce - Zhang Xueting - NTU.pdf
+9100321619,PR756072,EP547624,SINGLAB TECHNOLOGIES PTE LTD,Takara gibson mastermix,Ordered,Ordered,,,9100321619.pdf,yes,1,9100321619_quote_Richard Q67174.pdf

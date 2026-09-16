@@ -18,6 +18,7 @@ if '<script src="data.js"></script>' not in html:
 # A standalone file needs the document scaffolding the Artifact runtime supplies.
 head = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+        '<meta name="robots" content="noindex, nofollow, noarchive">\n'
         '<style>:root{color-scheme:light}body{margin:0}'
         'img{max-width:100%}[hidden]{display:none!important}</style>\n')
 body = html.replace('<script src="data.js"></script>',
@@ -29,6 +30,7 @@ if m:
     body = body[m.end():]
 out = head + title + '</head>\n<body>\n' + body + '\n</body>\n</html>\n'
 
-path = os.path.join(DASH, 'she-lab-spend-ledger.html')
-open(path, 'w').write(out)
-print(f'{path}: {os.path.getsize(path)/1024:.0f} KB (self-contained)')
+for path in (os.path.join(DASH, 'she-lab-spend-ledger.html'),
+             os.path.join(HERE, '..', 'index.html')):   # index.html = GitHub Pages entry
+    open(path, 'w').write(out)
+    print(f'{os.path.normpath(path)}: {os.path.getsize(path)/1024:.0f} KB (self-contained)')

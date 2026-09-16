@@ -1,0 +1,3 @@
+# Link-only: this page is shared with colleagues, not meant to be searchable.
+User-agent: *
+Disallow: /

@@ -101,6 +101,13 @@ for rec in pos:
             'source_pdf': h.get('source_pdf'),
         })
 
+# The PO's "RECEIVER NAME / CONTACT NO" field embeds lab members' personal mobile
+# numbers. They carry no analytical value and the dataset is shared, so drop the
+# digits and keep only the name.
+PHONE = re.compile(r'\b[689]\d{3}\s?\d{4}\b')
+for r in rows:
+    r['receiver'] = re.sub(r'\s{2,}', ' ', PHONE.sub('', r['receiver'])).strip()
+
 rows.sort(key=lambda r: (r['issue_date'] or '', r['po_number'], r['line_no']))
 path = os.path.join(OUT, 'po_line_items.csv')
 with open(path, 'w', newline='') as fh:

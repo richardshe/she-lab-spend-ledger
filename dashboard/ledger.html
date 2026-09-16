@@ -226,6 +226,31 @@ th.sortable { cursor: pointer; user-select: none; }
 th.sortable:hover { color: var(--ink); }
 th .arrow { color: var(--accent); }
 
+/* item cell: name, then catalogue number + ordered grade, then optional detail */
+.item-cell { min-width: 260px; max-width: 430px; }
+.item-name { font-weight: 500; }
+.item-meta {
+  font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--ink-3);
+  margin-top: 2px; word-break: break-word;
+}
+.item-meta code { color: var(--ink-2); }
+.disclose {
+  float: left; margin: 1px 6px 0 0; width: 16px; height: 16px; padding: 0;
+  font: 500 12px/14px "IBM Plex Mono", monospace; color: var(--ink-2);
+  background: var(--surface-2); border: 1px solid var(--border-firm);
+  border-radius: 3px; cursor: pointer;
+}
+.disclose:hover { color: var(--ink); border-color: var(--ink-3); }
+.disclose:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+tr.detail > td { border-bottom: 1px solid var(--border); padding-top: 0; }
+tr.detail:hover { background: none; }
+.detail-body {
+  font-family: "IBM Plex Mono", monospace; font-size: 11.5px; line-height: 1.6;
+  color: var(--ink-2); background: var(--surface-2); border-radius: 5px;
+  padding: 9px 11px; word-break: break-word; max-width: 780px;
+}
+.detail-body .muted { font-family: "IBM Plex Sans", sans-serif; margin-top: 6px; }
+
 .chip {
   display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10.5px;
   letter-spacing: .04em; padding: 1.5px 6px; border-radius: 4px;
@@ -635,13 +660,18 @@ footer code { font-size: 11.5px; color: var(--ink-2); }
     { k: "i", t: "Item" },
     { k: "c", t: "Category" },
     { k: "q", t: "Qty", cls: "num r" },
+    { k: "up", t: "Unit price net", cls: "num r" },
     { k: "amt", t: "Amount S$", cls: "num r" }
   ];
+  var openRows = new Set();
   function renderItems(rows) {
     var sorted = rows.slice().sort(function (a, b) {
       var av, bv;
       if (state.sort === "amt") { av = amt(a); bv = amt(b); }
-      else { av = a[state.sort]; bv = b[state.sort]; }
+      else if (state.sort === "up") {
+        av = (a.up || 0) * (a.cur === "USD" ? state.fx : 1);
+        bv = (b.up || 0) * (b.cur === "USD" ? state.fx : 1);
+      } else { av = a[state.sort]; bv = b[state.sort]; }
       if (av == null) av = "";
       if (bv == null) bv = "";
       return (av < bv ? -1 : av > bv ? 1 : 0) * state.dir;
@@ -661,26 +691,56 @@ footer code { font-size: 11.5px; color: var(--ink-2); }
       return '<th class="sortable ' + (c.cls || "") + '" data-k="' + c.k + '">' + c.t +
         (on ? ' <span class="arrow">' + (state.dir > 0 ? "↑" : "↓") + "</span>" : "") + "</th>";
     }).join("") + "</tr></thead><tbody>" + slice.map(function (r) {
+      var id = r.po + "-" + r.ln, open = openRows.has(id);
       var flags = "";
       if (r.cur === "USD") flags += ' <span class="chip usd">USD ' + money(r.gr, 2) + "</span>";
       if (r.cf === "low") flags += ' <span class="chip warn" title="Categorised from the supplier, not the item text">vague</span>';
       if (r.dp) flags += ' <span class="chip good">' + r.dp + "% off</span>";
-      return "<tr>" +
-        '<td class="num">' + esc(r.d) + (r.est ? '<span class="chip warn" title="Issue date not printed on the PO; interpolated from PO sequence">est</span>' : "") + "</td>" +
-        '<td class="num">' + esc(r.po) + "</td>" +
+      var meta = [];
+      if (r.pn) meta.push('<code>' + esc(r.pn) + "</code>");
+      if (r.sp) meta.push(esc(r.sp));
+      var upSgd = r.up == null ? null : r.up * (r.cur === "USD" ? state.fx : 1);
+      var fx = r.cur === "USD" && r.up != null
+        ? ' <span class="muted">(US$' + money(r.up, 2) + ")</span>" : "";
+
+      var main = "<tr>" +
+        '<td class="num">' + esc(r.d) +
+          (r.est ? ' <span class="chip warn" title="Issue date not printed on the PO; interpolated from PO sequence">est</span>' : "") + "</td>" +
+        '<td class="num">' + esc(r.po) + '<div class="muted" style="font-size:11px">' + esc(r.pr) + "</div></td>" +
         "<td>" + esc(r.v) + "</td>" +
-        "<td>" + esc(r.i.length > 64 ? r.i.slice(0, 64) + "…" : r.i) + flags +
-        (r.pn ? ' <code class="muted" style="font-size:11px">' + esc(r.pn) + "</code>" : "") + "</td>" +
+        '<td class="item-cell">' +
+          (r.dt ? '<button class="disclose" type="button" data-id="' + id + '" aria-expanded="' +
+                  open + '" title="Show full description">' + (open ? "−" : "+") + "</button>" : "") +
+          '<span class="item-name">' + esc(r.i) + "</span>" + flags +
+          (meta.length ? '<div class="item-meta">' + meta.join(" · ") + "</div>" : "") +
+        "</td>" +
         "<td>" + esc(r.c) + '<div class="muted" style="font-size:11.5px">' + esc(r.s) + "</div></td>" +
-        '<td class="r num">' + (r.q == null ? "" : r.q) + "</td>" +
+        '<td class="r num">' + (r.q == null ? "" : r.q) +
+          (r.u ? ' <span class="muted">' + esc(r.u) + "</span>" : "") + "</td>" +
+        '<td class="r num">' + (r.up == null ? "—" : money(amt({
+            net: r.up, gr: r.up, cur: r.cur }), 2) + fx) + "</td>" +
         '<td class="r num">' + money(amt(r), 2) + "</td></tr>";
+
+      if (!open || !r.dt) return main;
+      return main + '<tr class="detail"><td></td><td></td><td></td>' +
+        '<td colspan="5"><div class="detail-body">' + esc(r.dt) +
+        (r.prt ? '<div class="muted">Requisition title: ' + esc(r.prt) + "</div>" : "") +
+        "</div></td></tr>";
     }).join("") + "</tbody>";
+
+    Array.prototype.forEach.call(el.querySelectorAll(".disclose"), function (b) {
+      b.addEventListener("click", function () {
+        var id = b.dataset.id;
+        if (openRows.has(id)) openRows["delete"](id); else openRows.add(id);
+        renderItems(rows);
+      });
+    });
 
     Array.prototype.forEach.call(el.querySelectorAll("th.sortable"), function (th) {
       th.addEventListener("click", function () {
         var k = th.dataset.k;
         if (state.sort === k) state.dir *= -1;
-        else { state.sort = k; state.dir = (k === "amt" || k === "q") ? -1 : 1; }
+        else { state.sort = k; state.dir = (k === "amt" || k === "q" || k === "up") ? -1 : 1; }
         state.page = 0;
         render();
       });

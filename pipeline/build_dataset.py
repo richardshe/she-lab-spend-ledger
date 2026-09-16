@@ -29,6 +29,56 @@ for q in quotes:
 
 FY_START = datetime.date(2025, 9, 1)   # first PO in the set is 19-Sep-2025
 
+# Ariba truncates the PO's "Product Name" with an ellipsis, so the readable item
+# name often has to be recovered from the longer "Full Description" block. IDT
+# oligos use their own structured form, where the useful name, the ordered grade
+# ("Alt-R CRISPR-Cas9 sgRNA, 2 nmol") and the sequence are all separate facts.
+OLIGO = re.compile(r'^Name:\s*(.*?)(?:\s+Sequence:\s*(.*?))?'
+                   r'(?=\s+Product:|\s+Purification:|\s+Bases:|\s+Notes:|$)', re.S)
+FIELD = lambda k: re.compile(k + r':\s*(.*?)(?=\s+(?:Sequence|Product|Purification|'
+                                   r'Bases|Notes):|$)', re.S)
+F_PRODUCT, F_PURIF, F_BASES = FIELD('Product'), FIELD('Purification'), FIELD('Bases')
+TRUNCATED = re.compile(r'(\.\.\.|\u2026|-)\s*$')
+NAME_MAX = 110   # longer product text stays readable in the expandable detail row
+
+
+def item_fields(it, pr_title):
+    """Return (name, spec, detail) - a readable name, the ordered grade, and the
+    full descriptive text."""
+    short = (it.get('product_name') or it.get('description') or '').strip()
+    full = (it.get('full_description') or '').strip()
+
+    m = OLIGO.match(full)
+    if m:
+        name = re.sub(r'\s+', ' ', m.group(1)).strip()
+        seq = re.sub(r'\s+', ' ', (m.group(2) or '')).strip()
+        prod = F_PRODUCT.search(full)
+        bases = F_BASES.search(full)
+        purif = F_PURIF.search(full)
+        spec = ' · '.join(filter(None, [
+            prod.group(1).strip() if prod else None,
+            (purif.group(1).strip() or None) if purif else None,
+            (bases.group(1).strip() + ' bases') if bases and bases.group(1).strip() else None,
+        ]))
+        return name or short, spec, (('Sequence: ' + seq) if seq else full)
+
+    # Not an oligo: prefer whichever text is genuinely more informative. Two
+    # things disqualify the "Full Description" as a name - it sometimes just
+    # repeats the requester's PR title, and on bulk orders it is a pasted table
+    # of sub-items. Either way the full text still belongs in the detail row.
+    full_is_justification = full.strip().lower() == pr_title.strip().lower()
+    numeric_tokens = len(re.findall(r'\b[\d.,]+\b', full[:160]))
+    looks_tabular = numeric_tokens >= 6
+    detail = full if full and full != short else ''
+    if full and len(full) > len(short) and not full_is_justification and not looks_tabular:
+        name = full if len(full) <= NAME_MAX else full[:NAME_MAX].rstrip() + '\u2026'
+    else:
+        name = short
+    name = re.sub(r'\s+', ' ', name).strip()
+    detail = re.sub(r'\s+', ' ', detail).strip()
+    return name, '', ('' if detail == name else detail)
+
+
 rows = []
 for rec in pos:
     h, man = rec['header'], manifest.get(rec['header'].get('po_number'), {})
@@ -48,6 +98,7 @@ for rec in pos:
         conf = ('high' if rule.startswith('kw:') else
                 'manual' if rule.startswith('manual') else
                 'medium' if rule.startswith('title:') else 'low')
+        iname, ispec, idetail = item_fields(it, man.get('title', '') or '')
         amt = it.get('amount') or 0.0
         net = it.get('net_amount')
         tax = it.get('taxes')
@@ -66,8 +117,11 @@ for rec in pos:
             'subcategory': sub,
             'category_rule': rule,
             'category_confidence': conf,
-            'item': (it.get('product_name') or it.get('description') or '').strip(),
-            'item_full_description': (it.get('full_description') or '').strip()[:500],
+            'item': iname,
+            'item_spec': ispec,
+            'item_detail': idetail[:1200],
+            'item_as_printed': (it.get('product_name') or it.get('description') or '').strip(),
+            'item_full_description': (it.get('full_description') or '').strip()[:1200],
             'part_number': it.get('part_number') or '',
             'qty': it.get('qty'),
             'uom': it.get('uom') or '',

@@ -3,7 +3,13 @@
 A pipeline that turns the Ariba purchase-order PDFs in this folder into a
 machine-readable spend ledger, plus a dashboard over it.
 
-**Dashboard:** https://claude.ai/artifact/62u5qTriNC5hYcm5iiMYQs
+**Dashboard:** https://richardshe.github.io/she-lab-spend-ledger/
+(also published privately as a Claude Artifact: https://claude.ai/artifact/62u5qTriNC5hYcm5iiMYQs)
+
+The published page is `index.html` — a single self-contained file with the data
+inlined, so it also works by double-clicking a local copy. It carries a `noindex`
+meta tag and the repo serves a `robots.txt` disallowing crawlers, so it is
+reachable by link but should not turn up in search results.
 
 **Coverage:** 175 POs / 333 line items, 19 Sep 2025 – 15 Sep 2026.
 **Total committed:** S$147,332 gross (incl. 9% GST) · S$138,418 net, at 1.30 USD/SGD.
@@ -20,7 +26,10 @@ analytics/                  the backend — plain CSV
   denied_requisitions.csv   PRs that never became POs (21)
 pipeline/                   the extraction code
   run_all.sh                rebuild everything from the PDFs
-dashboard/                  the front end (published as an Artifact)
+index.html                  the published page (self-contained, GitHub Pages entry)
+dashboard/                  front-end source
+  ledger.html + data.js     two-file version (what the Artifact publishes)
+  she-lab-spend-ledger.html single-file build, same as index.html
 po_raw.json, quotes_raw.json, payload.json   intermediates
 ```
 
@@ -30,7 +39,17 @@ po_raw.json, quotes_raw.json, payload.json   intermediates
 pip install -r pipeline/requirements.txt && ./pipeline/run_all.sh
 ```
 
-Then republish `dashboard/ledger.html` to refresh the live dashboard.
+`run_all.sh` refreshes the CSVs and `dashboard/data.js`; then
+`python3 pipeline/build_standalone.py` rebuilds `index.html`. Commit and push to
+update the GitHub Pages site; republish `dashboard/ledger.html` to update the
+Artifact.
+
+### A note on personal data
+
+`build_dataset.py` strips the mobile numbers that Ariba embeds in each PO's
+`RECEIVER NAME / CONTACT NO` field — the repo is public, and they carry no
+analytical value. The source PDFs (gitignored) still contain them, along with
+supplier contact details. Keep them out of the repo.
 
 ---
 
